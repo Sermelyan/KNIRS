@@ -12,6 +12,7 @@ Heap* new_heap_from_array(long *array, unsigned size);
 void delete_heap(Heap *h);
 
 void insert_heap(Heap *h);
+
 long extract_min_heap(Heap *h);
 long peek_min_heap(Heap *h);
 
