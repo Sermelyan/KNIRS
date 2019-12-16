@@ -8,6 +8,7 @@
 MatrixGraph::MatrixGraph(unsigned int count) : matrix(count) {
     for (auto &item : matrix) {
         item.assign(count, 0);
+        item.shrink_to_fit();
     }
 }
 
