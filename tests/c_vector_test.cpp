@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 
 extern "C" {
-    #include "../c/utils.h"
+    #include "utils.h"
 }
 
 TEST(UtilsTest, VectorPushBackTest) {
@@ -41,7 +41,7 @@ TEST(UtilsTest, VectorCreateFromArrayTest) {
     }
     Vector *v = create_from(100, arr);
     ASSERT_EQ(v->size, 100);
-    ASSERT_EQ(v->capacity, 150);
+    ASSERT_EQ(v->capacity, 100);
     for (int j = 0; j < 100; ++j) {
         ASSERT_EQ(get_at(v, j), j);
     }

@@ -51,7 +51,7 @@ Vector *create_size(unsigned int size) {
     return new_vector(size, size, NULL);
 }
 Vector *create_from(unsigned int size, unsigned int *from) {
-    return new_vector(size, size + size / 2, from);
+    return new_vector(size, size, from);
 }
 
 void delete_vec(Vector *ths) {
@@ -67,7 +67,7 @@ inline int push_back(Vector *ths, unsigned int element) {
     return 1;
 }
 
-unsigned int get_at(Vector *ths, unsigned int pos) {
+inline unsigned int get_at(Vector *ths, unsigned int pos) {
     assert(pos >=0 && pos < ths->size);
     return ths->array[pos];
 }

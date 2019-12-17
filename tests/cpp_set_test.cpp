@@ -6,12 +6,10 @@
 #include <queue>
 #include <random>
 #include <vector>
+#include <ListGraph.hpp>
 
-#include "ArcGraph.hpp"
-#include "ListGraph.hpp"
-#include "MatrixGraph.hpp"
-#include "MatrixRPGraph.hpp"
 #include "SetGraph.hpp"
+#include "UnorderedSetGraph.hpp"
 
 void BFS(const IGraph &graph, unsigned int vertex) {
     std::vector<bool> visited(graph.VerticesCount(), false);
@@ -32,11 +30,10 @@ void BFS(const IGraph &graph, unsigned int vertex) {
 }
 
 std::vector<std::pair<unsigned int, unsigned int>> arcs;
-ListGraph *lg;
-MatrixRPGraph *mg;
 SetGraph *sg;
-ArcGraph *ag;
-unsigned int count = 1000;
+UnorderedSetGraph *ag;
+ListGraph *lg;
+unsigned int count = 100000;
 
 TEST(DataPrerpare, ArcsGen) {
     std::random_device rd{};
@@ -51,32 +48,16 @@ TEST(DataPrerpare, ArcsGen) {
     }
 }
 
-TEST(DataPrerpare, ListAlloc) {
-    lg = new ListGraph(count);
-}
-
-TEST(DataPrerpare, MatrixAlloc) {
-    mg = new MatrixRPGraph(count);
-}
-
 TEST(DataPrerpare, SetAlloc) {
     sg = new SetGraph(count);
 }
 
-TEST(DataPrerpare, ArcAlloc) {
-    ag = new ArcGraph(count);
+TEST(DataPrerpare, UnorderedSetAlloc) {
+    ag = new UnorderedSetGraph(count);
 }
 
-TEST(GraphFilling, ListFill) {
-    for (const auto &arc : arcs) {
-        lg->AddEdge(arc.first, arc.second);
-    }
-}
-
-TEST(GraphFilling, MatrixFill) {
-    for (const auto &arc : arcs) {
-        mg->AddEdge(arc.first, arc.second);
-    }
+TEST(DataPrerpare, ListAlloc) {
+    lg = new ListGraph(count);
 }
 
 TEST(GraphFilling, SetFill) {
@@ -85,21 +66,15 @@ TEST(GraphFilling, SetFill) {
     }
 }
 
-TEST(GraphFilling, ArcFill) {
+TEST(GraphFilling, UnorderedSetFill) {
     for (const auto &arc : arcs) {
         ag->AddEdge(arc.first, arc.second);
     }
 }
 
-TEST(GraphBFSTest, List) {
-    for (int v = 0; v < lg->VerticesCount(); ++v) {
-        BFS(*lg, v);
-    }
-}
-
-TEST(GraphBFSTest, Matrix) {
-    for (int v = 0; v < mg->VerticesCount(); ++v) {
-        BFS(*mg, v);
+TEST(GraphFilling, ListFill) {
+    for (const auto &arc : arcs) {
+        lg->AddEdge(arc.first, arc.second);
     }
 }
 
@@ -109,17 +84,22 @@ TEST(GraphBFSTest, Set) {
     }
 }
 
-TEST(GraphBFSTest, Arc) {
+TEST(GraphBFSTest, UnorderedSet) {
     for (int v = 0; v < ag->VerticesCount(); ++v) {
         BFS(*ag, v);
     }
 }
 
+TEST(GraphBFSTest, List) {
+    for (int v = 0; v < lg->VerticesCount(); ++v) {
+        BFS(*lg, v);
+    }
+}
+
 TEST(DataFree, CleanUp) {
-    delete lg;
-    delete mg;
     delete sg;
     delete ag;
+    delete lg;
 }
 
 int main(int argc, char **argv) {

@@ -7,17 +7,17 @@
 #ifndef GRAPH_LIST_GRAPH_H
 #define GRAPH_LIST_GRAPH_H
 
-typedef struct graph {
+typedef struct l_graph {
     Vector **adjacency_lists;
     unsigned int count;
 } List_graph;
 
-List_graph *create_graph(unsigned int count);
-void delete_graph(List_graph *ths);
+List_graph *list_graph_create(unsigned int count);
+void list_graph_delete(List_graph *ths);
 
-void add_edge(List_graph *ths, unsigned int from, unsigned int to);
+void list_graph_add_edge(List_graph *ths, unsigned int from, unsigned int to);
 
-Vector *get_next_vertices(List_graph *ths, unsigned int vertex);
-Vector *get_prev_vertices(List_graph *ths, unsigned int vertex);
+Vector *list_graph_get_next_vertices(List_graph *ths, unsigned int vertex);
+Vector *list_graph_get_prev_vertices(List_graph *ths, unsigned int vertex);
 
 #endif //GRAPH_LIST_GRAPH_H
