@@ -36,7 +36,7 @@ ListGraph *lg;
 MatrixRPGraph *mg;
 SetGraph *sg;
 ArcGraph *ag;
-unsigned int count = 45000;
+unsigned int count = 10000;
 
 TEST(DataPrerpare, ArcsGen) {
     std::random_device rd{};

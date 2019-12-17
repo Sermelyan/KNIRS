@@ -41,7 +41,7 @@ inline Vector *arc_graph_get_next_vertices(Arc_graph *ths, unsigned int vertex) 
     Vector *result = create();
     for (unsigned int i = 0; i < ths->arcs->size; i += 2)
         if (get_at(ths->arcs, i) == vertex)
-            push_back(result, i + 1);
+            push_back(result, get_at(ths->arcs,i + 1));
     return result;
 }
 
@@ -50,7 +50,7 @@ Vector *arc_graph_get_prev_vertices(Arc_graph *ths, unsigned int vertex) {
     Vector *result = create();
     for (unsigned int i = 1; i < ths->arcs->size; i += 2)
         if (get_at(ths->arcs, i) == vertex)
-            push_back(result, i - 1);
+            push_back(result, get_at(ths->arcs,i - 1));
     return result;
 }
 
