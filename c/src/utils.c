@@ -24,7 +24,7 @@ static inline Vector *new_vector(unsigned int size, unsigned int capacity, unsig
         return NULL;
     }
     if (from) {
-        memcpy(temp->array, from, size);
+        memcpy(temp->array, from, size * sizeof(unsigned int));
     }
     return temp;
 }
@@ -37,7 +37,7 @@ static inline int resize(Vector *ths) {
         free(temp);
         return 0;
     }
-    memcpy(temp, ths->array, ths->size); //TODO Add memcpy after check
+    memcpy(temp, ths->array, ths->size * sizeof(unsigned int)); //TODO Add memcpy after check
     free(ths->array);
     ths->array = temp;
     return 1;
@@ -69,12 +69,13 @@ inline int push_back(Vector *ths, unsigned int element) {
 
 unsigned int get_at(Vector *ths, unsigned int pos) {
     assert(pos >=0 && pos < ths->size);
-    return (ths->array)[pos];
+    return ths->array[pos];
 }
 
 int set_at(Vector *ths, unsigned int pos, unsigned int element) {
-    if (pos >=0 && pos < ths->size)
-        return 0;
-    (ths->array)[pos] = element;
-    return 1;
+    if (pos >=0 && pos < ths->size) {
+        ths->array[pos] = element;
+        return 1;
+    }
+    return 0;
 }

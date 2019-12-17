@@ -18,7 +18,7 @@ Vector *create_from(unsigned int size, unsigned int *from);
 void delete_vec(Vector *ths);
 
 int push_back(Vector *ths, unsigned int element);
-const unsigned int get_at(Vector *ths, unsigned int pos);
+unsigned int get_at(Vector *ths, unsigned int pos);
 int set_at(Vector *ths, unsigned int pos, unsigned int element);
 
 #endif //GRAPH_UTILS_H

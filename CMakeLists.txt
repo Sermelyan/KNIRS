@@ -2,16 +2,28 @@ cmake_minimum_required(VERSION 3.15)
 project(graph)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_STANDARD 11)
 
-add_library(list_cpp cpp/ListGraph.cpp)
-add_library(matrix_cpp cpp/MatrixGraph.cpp)
-add_library(matrixrp_cpp cpp/MatrixRPGraph.cpp)
-add_library(set_cpp cpp/SetGraph.cpp)
-add_library(arc_cpp cpp/ArcGraph.cpp)
+include_directories(cpp/include)
+include_directories(c/include)
 
-add_library(utils_c c/utils.c)
-add_library(matrix_c c/matrix_graph.c)
+add_library(list_cpp cpp/src/ListGraph.cpp)
+add_library(matrix_cpp cpp/src/MatrixGraph.cpp)
+add_library(matrixrp_cpp cpp/src/MatrixRPGraph.cpp)
+add_library(set_cpp cpp/src/SetGraph.cpp)
+add_library(arc_cpp cpp/src/ArcGraph.cpp)
+
+add_library(utils_c c/src/utils.c)
+add_library(matrix_c c/src/matrix_graph.c)
 target_link_libraries(matrix_c utils)
+add_library(list_c c/src/list_graph.c)
+target_link_libraries(list_c utils)
 
-add_executable(test test.cpp)
-target_link_libraries(test list_cpp matrix_cpp matrixrp_cpp set_cpp arc_cpp utils_c gtest)
+add_executable(cpp_graph_unit_test tests/cpp_graph_unit_test.cpp)
+target_link_libraries(cpp_graph_unit_test list_cpp matrix_cpp matrixrp_cpp set_cpp arc_cpp gtest)
+
+add_executable(c_graph_unit_test tests/c_graph_unit_test.cpp)
+target_link_libraries(c_graph_unit_test matrix_c gtest)
+
+add_executable(c_vector_test tests/c_vector_test.cpp)
+target_link_libraries(c_vector_test utils_c gtest)
