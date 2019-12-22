@@ -43,3 +43,21 @@ target_link_libraries(c_vector_test utils_c gtest)
 
 add_executable(cpp_set_test tests/cpp_set_test.cpp)
 target_link_libraries(cpp_set_test set_cpp uset_cpp list_cpp gtest)
+
+add_executable(cpp_matrix tests/cpp_matrix.cpp)
+target_link_libraries(cpp_matrix matrix_cpp gtest)
+
+add_executable(cpp_list tests/cpp_list.cpp)
+target_link_libraries(cpp_list list_cpp gtest)
+
+add_executable(cpp_arc tests/cpp_arc.cpp)
+target_link_libraries(cpp_arc arc_cpp gtest)
+
+add_executable(c_matrix tests/c_matrix.cpp)
+target_link_libraries(c_matrix matrix_c gtest)
+
+add_executable(c_list tests/c_list.cpp)
+target_link_libraries(c_list list_c gtest)
+
+add_executable(c_arc tests/c_arc.cpp)
+target_link_libraries(c_arc arc_c gtest)
